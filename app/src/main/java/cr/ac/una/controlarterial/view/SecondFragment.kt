@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import cr.ac.una.controlarterial.Entity.TomaArterial
@@ -60,6 +61,10 @@ class SecondFragment : Fragment() {
                 binding.editTextDistolica.setText("")
                 binding.editTextSistolica.setText("")
                 binding.editTextRitmo.setText("")
+
+                //mensaje
+                Toast.makeText(context, "Se agregó correctamente", Toast.LENGTH_SHORT).show()
+
             }
 
 
