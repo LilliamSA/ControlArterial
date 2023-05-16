@@ -5,9 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import cr.ac.una.controlarterial.Entity.TomaArterial
 import cr.ac.una.controlarterial.R
 import cr.ac.una.controlarterial.databinding.FragmentSecondBinding
+import cr.ac.una.controlarterial.viewModel.TomaArterialViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -15,9 +22,7 @@ import cr.ac.una.controlarterial.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private lateinit var tomaArterialViewModel: TomaArterialViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -36,9 +41,31 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
-    }
 
-    override fun onDestroyView() {
+        // Llamar al viewmodel para agregar una toma arterial
+        tomaArterialViewModel = ViewModelProvider(this).get(TomaArterialViewModel::class.java)
+        binding.buttonSave.setOnClickListener {
+            val _uuid = null
+            val distolica = binding.editTextDistolica.text.toString().toInt()
+            val sistolica = binding.editTextSistolica.text.toString().toInt()
+            val ritmo = binding.editTextRitmo.text.toString().toInt()
+
+            val tomaArterial = TomaArterial(_uuid,distolica, sistolica, ritmo)
+
+            // Lanzar una coroutine para llamar al método insertTomaArterial
+            CoroutineScope(Dispatchers.Main).launch {
+                tomaArterialViewModel.insertTomaArterial(tomaArterial)
+
+                // Limpiar los campos de texto
+                binding.editTextDistolica.setText("")
+                binding.editTextSistolica.setText("")
+                binding.editTextRitmo.setText("")
+            }
+
+
+        }
+    }
+        override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

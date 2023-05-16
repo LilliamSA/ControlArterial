@@ -12,7 +12,7 @@ interface TomaArterialDAO {
         @GET("postman/{uuid}")
         suspend fun getItem(@Path("uuid") uuid: String): TomaArterial
 
-        @POST("postman")
+        @POST("prueba")
         suspend fun createItem( @Body items: List<TomaArterial>): TomasArteriales
 
         @PUT("postman/{uuid}")
