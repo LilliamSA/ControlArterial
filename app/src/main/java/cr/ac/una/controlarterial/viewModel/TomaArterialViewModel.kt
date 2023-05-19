@@ -24,14 +24,14 @@ class TomaArterialViewModel: ViewModel (){
 
     }
 
-suspend fun insertTomaArterial(tomaArterial: TomaArterial) {
+    suspend fun insertTomaArterial(tomaArterial: TomaArterial) {
         intService()
         var lista = apiService.createItem(listOf(tomaArterial))
         _tomasArteriales.postValue(lista.items)
     }
     fun intService(){
         val client = OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor("jKy950eLKXPiJrNLBXFj59IOlPbqkq4VTmFLAWGLzl_ItOgWyw"))
+            .addInterceptor(AuthInterceptor("24AtEiHD6enBaq1Yqit_i_wF71TY71eUjtHZ_CVaztYPuco9nQ"))
             .build()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://crudapi.co.uk/api/v1/")
@@ -39,5 +39,27 @@ suspend fun insertTomaArterial(tomaArterial: TomaArterial) {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         apiService = retrofit.create(TomaArterialDAO::class.java)
+    }
+
+    //buscar toma por id
+    suspend fun getItem(uuid: String) {
+        intService()
+        var toma = apiService.getItem(uuid)
+        _tomasArteriales.postValue(listOf(toma))
+    }
+
+    //actualizar toma
+    suspend fun updateItem(uuid: String, tomaArterial: TomaArterial) {
+        intService()
+        var lista = apiService.updateItem(uuid, tomaArterial)
+        _tomasArteriales.postValue(lista.items)
+        listTomaArterial()
+    }
+
+    //eliminar toma
+    suspend fun deleteItem(uuid: String) {
+        intService()
+        apiService.deleteItem(uuid)
+        listTomaArterial()
     }
 }

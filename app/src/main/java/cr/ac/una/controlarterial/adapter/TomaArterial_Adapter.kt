@@ -1,53 +1,104 @@
 package cr.ac.una.controlarterial.adapter
 
-import android.content.Context
+
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import cr.ac.una.controlarterial.Entity.TomaArterial
 import cr.ac.una.controlarterial.R
 
 
-class TomaArterial_Adapter(context: Context, presiones: List<TomaArterial>) :
-    ArrayAdapter<TomaArterial>(context, 0, presiones) {
+class TomaArterial_Adapter(var tomasArteriales: ArrayList<TomaArterial>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val VIEW_TYPE_HEADER = 0
+    private val VIEW_TYPE_ITEM = 1
 
-    private var items: List<TomaArterial> = presiones
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var view = convertView
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_TYPE_HEADER) {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_header, parent, false)
+            HeaderViewHolder(view)
+        } else {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+            ViewHolder(view)
         }
 
-        val presion = getItem(position)
 
-        val distolicaTextView = view!!.findViewById<TextView>(R.id.distolica)
-        val sistolicaTextView = view.findViewById<TextView>(R.id.sistolica)
-        val ritmoTextView = view.findViewById<TextView>(R.id.ritmo)
-
-        distolicaTextView.text = presion?.distolica.toString()
-        sistolicaTextView.text = presion?.sistolica.toString()
-        ritmoTextView.text = presion?.ritmo.toString()
-
-        return view
+    }
+    fun getItem(position: Int): TomaArterial {
+        return tomasArteriales[position]
     }
 
-    fun updateItems(newItems: List<TomaArterial>) {
-        items = newItems
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            VIEW_TYPE_HEADER
+        } else {
+            VIEW_TYPE_ITEM
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = tomasArteriales[position]
+
+        if (holder is HeaderViewHolder) {
+            holder.bind()
+        } else if (holder is ViewHolder) {
+            val controlArterialItem = item
+            holder.bind(controlArterialItem)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return tomasArteriales.size
+    }
+    fun updateData(newData: ArrayList<TomaArterial>) {
+
+        tomasArteriales = newData
+        if (!newData.isEmpty())
+            if(newData[0]._uuid !=null)
+                newData.add(0,TomaArterial(null,0,0,0))
         notifyDataSetChanged()
     }
 
-    override fun getCount(): Int {
-        return items.size
-    }
+    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        fun bind(){
+            val sistolicaTextView = itemView.findViewById<TextView>(R.id.sistolica)
+            val distolicaTextView = itemView.findViewById<TextView>(R.id.distolica)
+            val ritmoTextView = itemView.findViewById<TextView>(R.id.ritmo)
+            sistolicaTextView.text = "Sistólica"
+            distolicaTextView.text = "Diastólica"
+            ritmoTextView.text = "Ritmo"
+        }
 
-    override fun getItem(position: Int): TomaArterial? {
-        return items[position]
     }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+        val sistolicaTextView = itemView.findViewById<TextView>(R.id.sistolica)
+        val distolicaTextView = itemView.findViewById<TextView>(R.id.distolica)
+        val ritmoTextView = itemView.findViewById<TextView>(R.id.ritmo)
+
+        fun bind(tomaArterial: TomaArterial) {
+
+            if (tomaArterial.sistolica < 120 || tomaArterial.distolica < 80 ) {
+                itemView.setBackgroundColor(Color.GREEN)
+            } else if (tomaArterial.sistolica > 120 && tomaArterial.sistolica < 129 ||
+                tomaArterial.distolica < 80) {
+                itemView.setBackgroundColor(Color.YELLOW)
+            } else if (tomaArterial.sistolica > 130 && tomaArterial.sistolica < 139 ||
+                tomaArterial.distolica > 80 && tomaArterial.distolica < 89){
+                itemView.setBackgroundColor(Color.GRAY)
+            }else{
+                itemView.setBackgroundColor(Color.RED)
+            }
+
+            /* itemView.setBackgroundColor (Color.LTGRAY)
+             itemView.setBackgroundColor (Color.LTGRAY)*/
+            sistolicaTextView.text = tomaArterial.sistolica.toString()
+            distolicaTextView.text = tomaArterial.distolica.toString()
+            ritmoTextView.text = tomaArterial.ritmo.toString()
+        }
+
     }
 }
