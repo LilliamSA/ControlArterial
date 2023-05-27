@@ -48,9 +48,6 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
 
         //Se inicializa el Adapter con una lista vacía
         val listView = view.findViewById<RecyclerView>(R.id.list_presiones)
