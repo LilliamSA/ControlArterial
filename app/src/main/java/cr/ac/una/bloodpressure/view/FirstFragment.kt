@@ -1,4 +1,4 @@
-package cr.ac.una.controlarterial.view
+package cr.ac.una.bloodpressure.view
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -6,28 +6,21 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.ListView
 import androidx.core.content.ContextCompat
 
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import cr.ac.una.controlarterial.Entity.TomaArterial
-import cr.ac.una.controlarterial.R
-import cr.ac.una.controlarterial.adapter.TomaArterial_Adapter
-import cr.ac.una.controlarterial.databinding.FragmentFirstBinding
-import cr.ac.una.controlarterial.viewModel.TomaArterialViewModel
-import androidx.lifecycle.lifecycleScope
+import cr.ac.una.bloodpressure.Entity.TomaArterial
+import cr.ac.una.bloodpressure.R
+import cr.ac.una.bloodpressure.adapter.TomaArterial_Adapter
+import cr.ac.una.bloodpressure.databinding.FragmentFirstBinding
+import cr.ac.una.bloodpressure.viewModel.TomaArterialViewModel
 import kotlinx.coroutines.launch
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cr.ac.una.controlarterial.Entity.TomasArteriales
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-
-import kotlinx.coroutines.launch
 
 class FirstFragment : Fragment() {
 
@@ -80,7 +73,6 @@ class FirstFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 if (position != 0) {
-                    val id = tomasArteriales[position]._uuid
                     val deletedItem = tomasArteriales[position]
                     (tomasArteriales as MutableList<TomaArterial>).removeAt(position)
                     adapter.updateData(tomasArteriales as ArrayList<TomaArterial>)

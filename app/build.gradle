@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'cr.ac.una.controlarterial'
+    namespace 'cr.ac.una.bloodpressure'
     compileSdk 33
 
     defaultConfig {
-        applicationId "cr.ac.una.controlarterial"
+        applicationId "cr.ac.una.bloodpressure"
         minSdk 28
         targetSdk 33
         versionCode 1

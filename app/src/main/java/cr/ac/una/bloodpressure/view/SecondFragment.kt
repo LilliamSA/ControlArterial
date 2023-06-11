@@ -1,4 +1,4 @@
-package cr.ac.una.controlarterial.view
+package cr.ac.una.bloodpressure.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import cr.ac.una.controlarterial.Entity.TomaArterial
-import cr.ac.una.controlarterial.R
-import cr.ac.una.controlarterial.databinding.FragmentSecondBinding
-import cr.ac.una.controlarterial.viewModel.TomaArterialViewModel
+import cr.ac.una.bloodpressure.Entity.TomaArterial
+import cr.ac.una.bloodpressure.R
+import cr.ac.una.bloodpressure.databinding.FragmentSecondBinding
+import cr.ac.una.bloodpressure.viewModel.TomaArterialViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

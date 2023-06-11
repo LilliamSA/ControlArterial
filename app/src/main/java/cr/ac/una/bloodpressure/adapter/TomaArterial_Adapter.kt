@@ -1,4 +1,4 @@
-package cr.ac.una.controlarterial.adapter
+package cr.ac.una.bloodpressure.adapter
 
 
 import android.graphics.Color
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import cr.ac.una.controlarterial.Entity.TomaArterial
-import cr.ac.una.controlarterial.R
+import cr.ac.una.bloodpressure.Entity.TomaArterial
+import cr.ac.una.bloodpressure.R
 
 
 class TomaArterial_Adapter(var tomasArteriales: ArrayList<TomaArterial>) :

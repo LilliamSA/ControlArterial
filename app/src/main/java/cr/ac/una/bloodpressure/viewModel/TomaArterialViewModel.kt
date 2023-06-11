@@ -1,12 +1,12 @@
-package cr.ac.una.controlarterial.viewModel
+package cr.ac.una.bloodpressure.viewModel
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cr.ac.una.controlarterial.AuthInterceptor
-import cr.ac.una.controlarterial.Entity.TomaArterial
-import cr.ac.una.controlarterial.dao.TomaArterialDAO
+import cr.ac.una.bloodpressure.AuthInterceptor
+import cr.ac.una.bloodpressure.Entity.TomaArterial
+import cr.ac.una.bloodpressure.dao.TomaArterialDAO
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

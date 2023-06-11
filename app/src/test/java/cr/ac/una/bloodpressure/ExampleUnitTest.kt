@@ -1,4 +1,4 @@
-package cr.ac.una.controlarterial
+package cr.ac.una.bloodpressure
 
 import org.junit.Test
 

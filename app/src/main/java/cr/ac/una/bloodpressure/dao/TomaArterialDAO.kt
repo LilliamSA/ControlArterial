@@ -1,7 +1,7 @@
-package cr.ac.una.controlarterial.dao
+package cr.ac.una.bloodpressure.dao
 
-import cr.ac.una.controlarterial.Entity.TomaArterial
-import cr.ac.una.controlarterial.Entity.TomasArteriales
+import cr.ac.una.bloodpressure.Entity.TomaArterial
+import cr.ac.una.bloodpressure.Entity.TomasArteriales
 import retrofit2.http.*
 
 interface TomaArterialDAO {
